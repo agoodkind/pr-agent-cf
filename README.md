@@ -18,7 +18,7 @@ Updates to `main` deploy through GitHub Actions. Configure the `CLOUDFLARE_API_T
 
 ## Verification
 
-Run `npm test` for Worker routing. Run `npm run check` to test routing and validate the Wrangler bundle. After deployment, the workflow waits for `https://agoodkind-nano-pr-reviewer.alex-ee7.workers.dev/health` to return HTTP 200.
+Run `npm test` for Worker routing. Run `npm run check` to test routing and validate the Wrangler bundle. After deployment, the workflow waits for the container-backed root endpoint to return HTTP 200. The `/health` endpoint checks only the routing Worker without starting PR-Agent.
 
 Production acceptance also requires a successful signed GitHub webhook redelivery and visible PR-Agent output on a pull request.
 
