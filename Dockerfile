@@ -1,4 +1,4 @@
-FROM ghcr.io/agoodkind/pr-agent@sha256:bfe1458183cbb78cd5aeb318683eea146beb0d1e22f4679c66341c4a9a09ec86
+FROM ghcr.io/agoodkind/pr-agent@sha256:675b42d7b55e3518bc2c022715391fd7d1c72ef694bf12f4e5e444e6ad0b4eaa
 
 ENV HOME=/tmp
 
