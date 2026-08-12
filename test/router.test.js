@@ -135,6 +135,41 @@ test("health probe retries until the endpoint returns HTTP 200", async function 
   assert.equal(requestCount, 2);
 });
 
+test("health probe defaults to the container-backed root path", async function (context) {
+  let requestedPath;
+  const server = http.createServer(function (request, response) {
+    requestedPath = request.url;
+    response.writeHead(200);
+    response.end();
+  });
+  server.listen(0, "127.0.0.1");
+  await once(server, "listening");
+  context.after(function () {
+    server.close();
+  });
+
+  const address = server.address();
+  assert.notEqual(address, null);
+  assert.notEqual(typeof address, "string");
+
+  let commandError;
+  try {
+    await execFileAsync(".github/scripts/probe-health.sh", [], {
+      env: {
+        ...process.env,
+        HEALTH_ORIGIN: `http://127.0.0.1:${address.port}`,
+        MAX_ATTEMPTS: "1",
+        RETRY_DELAY_SECONDS: "0",
+      },
+    });
+  } catch (error) {
+    commandError = error;
+  }
+
+  assert.equal(commandError, undefined);
+  assert.equal(requestedPath, "/");
+});
+
 test("PR-Agent triggers review and committable improve commands", function () {
   assert.equal(typeof createPrAgentEnvironment, "function");
 

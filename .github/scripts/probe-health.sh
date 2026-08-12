@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-HEALTH_URL="${HEALTH_URL:-https://agoodkind-nano-pr-reviewer.alex-ee7.workers.dev/}"
+HEALTH_ORIGIN="${HEALTH_ORIGIN:-https://agoodkind-nano-pr-reviewer.alex-ee7.workers.dev}"
+HEALTH_URL="${HEALTH_URL:-${HEALTH_ORIGIN%/}/}"
 MAX_ATTEMPTS="${MAX_ATTEMPTS:-30}"
 RETRY_DELAY_SECONDS="${RETRY_DELAY_SECONDS:-10}"
 
