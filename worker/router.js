@@ -1,4 +1,5 @@
 export function routeRequest(request, env) {
+  // Temporary lifecycle check verification.
   const url = new URL(request.url);
   if (request.method === "GET" && url.pathname === "/health") {
     return Response.json({ status: "ok" });
