@@ -179,6 +179,9 @@ test("PR-Agent triggers review and committable improve commands", function () {
   assert.equal(environment.CONFIG__PERSISTENT_INLINE_COMMENTS, "true");
   assert.equal(environment.PR_CODE_SUGGESTIONS__COMMITABLE_CODE_SUGGESTIONS, "true");
   assert.equal(environment.GITHUB_APP__HANDLE_PUSH_TRIGGER, "true");
+  assert.equal(environment.GITHUB__PUBLISH_AS_CHECK_RUN, "false");
+  assert.equal(environment.GITHUB__PUBLISH_REVIEW_LIFECYCLE, "true");
+  assert.equal(environment.GITHUB__REVIEW_LIFECYCLE_TIMEOUT_SECONDS, "600");
   assert.deepEqual(JSON.parse(environment.GITHUB_APP__PR_COMMANDS), ["/review", improveCommand]);
   assert.deepEqual(JSON.parse(environment.GITHUB_APP__PUSH_COMMANDS), ["/review", improveCommand]);
 });
