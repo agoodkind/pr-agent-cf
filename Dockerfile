@@ -1,4 +1,4 @@
-FROM pragent/pr-agent:0.42.0-github_app@sha256:e044769467726ce4b9533f9537438ef83d024eab035433f75c6e1debc334597f
+FROM ghcr.io/agoodkind/pr-agent@sha256:bfe1458183cbb78cd5aeb318683eea146beb0d1e22f4679c66341c4a9a09ec86
 
 ENV HOME=/tmp
 
