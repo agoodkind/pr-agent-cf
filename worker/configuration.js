@@ -20,6 +20,10 @@ export function createPrAgentEnvironment(secrets) {
     GITHUB__REVIEW_LIFECYCLE_TIMEOUT_SECONDS: "600",
     GITHUB__WEBHOOK_SECRET: secrets.GITHUB_WEBHOOK_SECRET,
     GUNICORN_WORKERS: "1",
+    LITELLM__EXTRA_HEADERS: JSON.stringify({
+      "CF-Access-Client-ID": secrets.CF_ACCESS_CLIENT_ID,
+      "CF-Access-Client-Secret": secrets.CF_ACCESS_CLIENT_SECRET,
+    }),
     OPENAI__API_BASE: "https://clyde-suburban.goodkind.io/v1",
     OPENAI__KEY: secrets.OPENAI_KEY,
     PR_CODE_SUGGESTIONS__COMMITABLE_CODE_SUGGESTIONS: "true",

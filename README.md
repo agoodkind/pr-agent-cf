@@ -9,8 +9,14 @@ Install dependencies with `npm install`.
 Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` only in your shell when running `npm run deploy`.
 
 Store the Clyde adapter token as the `OPENAI_KEY` Cloudflare Worker secret.
-Store `GITHUB_PRIVATE_KEY` and `GITHUB_WEBHOOK_SECRET` there too. Do not add
-their values to this repository.
+Store the `PR-Agent Clyde client` service token as `CF_ACCESS_CLIENT_ID` and
+`CF_ACCESS_CLIENT_SECRET`. Store `GITHUB_PRIVATE_KEY` and
+`GITHUB_WEBHOOK_SECRET` there too. Do not add their values to this repository.
+
+The `Clyde API` Cloudflare Access application protects
+`clyde-suburban.goodkind.io`. Its `PR-Agent service token` policy admits only
+the dedicated service token. Clyde then requires its own bearer token.
+The current service token expires on August 13, 2027.
 
 ## Deployment
 

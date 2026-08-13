@@ -18,6 +18,9 @@ New commits run the same commands. Improve results enable committable code
 suggestions, and persistent inline comments prevent duplicate suggestions across
 runs.
 
+Cloudflare Access rejects every Clyde request except requests carrying the
+dedicated PR-Agent service token. Clyde separately validates its bearer token.
+
 ## Delivery
 
 Pull requests run routing tests and validate the Wrangler deployment bundle.
