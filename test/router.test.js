@@ -190,7 +190,11 @@ test("PR-Agent triggers automatic reviews and keeps improve manual", function ()
 test("PR-Agent routes GPT 5.6 Sol requests through Clyde", function () {
   assert.equal(typeof createPrAgentEnvironment, "function");
 
-  const environment = createPrAgentEnvironment({ OPENAI_KEY: "clyde-token" });
+  const environment = createPrAgentEnvironment({
+    CF_ACCESS_CLIENT_ID: "access-client-id",
+    CF_ACCESS_CLIENT_SECRET: "redacted",
+    OPENAI_KEY: "clyde-token",
+  });
 
   assert.equal(environment.CONFIG__MODEL, "gpt-5.6-sol");
   assert.equal(
@@ -198,4 +202,8 @@ test("PR-Agent routes GPT 5.6 Sol requests through Clyde", function () {
     "https://clyde-suburban.goodkind.io/v1",
   );
   assert.equal(environment.OPENAI__KEY, "clyde-token");
+  assert.deepEqual(JSON.parse(environment.LITELLM__EXTRA_HEADERS), {
+    "CF-Access-Client-ID": "access-client-id",
+    "CF-Access-Client-Secret": "redacted",
+  });
 });
