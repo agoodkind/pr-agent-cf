@@ -8,7 +8,9 @@ Install dependencies with `npm install`.
 
 Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` only in your shell when running `npm run deploy`.
 
-Store `OPENAI_KEY`, `GITHUB_PRIVATE_KEY`, and `GITHUB_WEBHOOK_SECRET` as Cloudflare Worker secrets. Do not add their values to this repository.
+Store the Clyde adapter token as the `OPENAI_KEY` Cloudflare Worker secret.
+Store `GITHUB_PRIVATE_KEY` and `GITHUB_WEBHOOK_SECRET` there too. Do not add
+their values to this repository.
 
 ## Deployment
 

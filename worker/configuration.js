@@ -2,7 +2,7 @@ export function createPrAgentEnvironment(secrets) {
   return {
     CONFIG__FALLBACK_MODELS: "[]",
     CONFIG__MAX_MODEL_TOKENS: "32000",
-    CONFIG__MODEL: "gpt-5.4-nano",
+    CONFIG__MODEL: "gpt-5.6-sol",
     CONFIG__PERSISTENT_INLINE_COMMENTS: "true",
     CONFIG__REASONING_EFFORT: "none",
     GITHUB_APP__BOT_USER: "agoodkind-nano-pr-reviewer[bot]",
@@ -20,6 +20,7 @@ export function createPrAgentEnvironment(secrets) {
     GITHUB__REVIEW_LIFECYCLE_TIMEOUT_SECONDS: "600",
     GITHUB__WEBHOOK_SECRET: secrets.GITHUB_WEBHOOK_SECRET,
     GUNICORN_WORKERS: "1",
+    OPENAI__API_BASE: "https://clyde-suburban.goodkind.io/v1",
     OPENAI__KEY: secrets.OPENAI_KEY,
     PR_CODE_SUGGESTIONS__COMMITABLE_CODE_SUGGESTIONS: "true",
   };
