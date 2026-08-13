@@ -170,18 +170,19 @@ test("health probe defaults to the container-backed root path", async function (
   assert.equal(requestedPath, "/");
 });
 
-test("PR-Agent triggers review and committable improve commands", function () {
+test("PR-Agent triggers automatic reviews and keeps improve manual", function () {
   assert.equal(typeof createPrAgentEnvironment, "function");
 
   const environment = createPrAgentEnvironment({});
-  const improveCommand = "/improve --pr_code_suggestions.commitable_code_suggestions=true";
 
   assert.equal(environment.CONFIG__PERSISTENT_INLINE_COMMENTS, "true");
   assert.equal(environment.PR_CODE_SUGGESTIONS__COMMITABLE_CODE_SUGGESTIONS, "true");
   assert.equal(environment.GITHUB_APP__HANDLE_PUSH_TRIGGER, "true");
   assert.equal(environment.GITHUB__PUBLISH_AS_CHECK_RUN, "false");
+  assert.equal(environment.GITHUB__PUBLISH_REVIEW_DECISION, "true");
   assert.equal(environment.GITHUB__PUBLISH_REVIEW_LIFECYCLE, "true");
+  assert.equal(environment.GITHUB__REVIEW_DECISION_MIN_IMPORTANCE, "7");
   assert.equal(environment.GITHUB__REVIEW_LIFECYCLE_TIMEOUT_SECONDS, "600");
-  assert.deepEqual(JSON.parse(environment.GITHUB_APP__PR_COMMANDS), ["/review", improveCommand]);
-  assert.deepEqual(JSON.parse(environment.GITHUB_APP__PUSH_COMMANDS), ["/review", improveCommand]);
+  assert.deepEqual(JSON.parse(environment.GITHUB_APP__PR_COMMANDS), ["/review"]);
+  assert.deepEqual(JSON.parse(environment.GITHUB_APP__PUSH_COMMANDS), ["/review"]);
 });
