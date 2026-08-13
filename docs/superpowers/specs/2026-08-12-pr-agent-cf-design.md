@@ -12,7 +12,8 @@ A plain JavaScript Worker returns its own health response and forwards every
 other request to one named Container instance. The Container runs the pinned
 official PR-Agent image as a non-root user.
 
-PR-Agent uses `gpt-5.4-nano`. New pull requests run `/review` and `/improve`.
+PR-Agent uses `gpt-5.6-sol` through the Clyde OpenAI-compatible endpoint. New
+pull requests run `/review` and `/improve`.
 New commits run the same commands. Improve results enable committable code
 suggestions, and persistent inline comments prevent duplicate suggestions across
 runs.
@@ -25,7 +26,7 @@ Action on a hosted Ubuntu runner. Deployments run one at a time and finish with
 a live health probe.
 
 GitHub stores only the dedicated Cloudflare deployment token and account
-identifier. OpenAI and GitHub App secrets remain Cloudflare Worker secrets.
+identifier. Clyde and GitHub App secrets remain Cloudflare Worker secrets.
 
 ## Verification
 

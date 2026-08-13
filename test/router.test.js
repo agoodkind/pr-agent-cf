@@ -186,3 +186,16 @@ test("PR-Agent triggers automatic reviews and keeps improve manual", function ()
   assert.deepEqual(JSON.parse(environment.GITHUB_APP__PR_COMMANDS), ["/review"]);
   assert.deepEqual(JSON.parse(environment.GITHUB_APP__PUSH_COMMANDS), ["/review"]);
 });
+
+test("PR-Agent routes GPT 5.6 Sol requests through Clyde", function () {
+  assert.equal(typeof createPrAgentEnvironment, "function");
+
+  const environment = createPrAgentEnvironment({ OPENAI_KEY: "clyde-token" });
+
+  assert.equal(environment.CONFIG__MODEL, "gpt-5.6-sol");
+  assert.equal(
+    environment.OPENAI__API_BASE,
+    "https://clyde-suburban.goodkind.io/v1",
+  );
+  assert.equal(environment.OPENAI__KEY, "clyde-token");
+});
