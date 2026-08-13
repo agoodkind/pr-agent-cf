@@ -5,7 +5,7 @@ export function createPrAgentEnvironment(secrets) {
     CONFIG__MODEL: "gpt-5.6-sol",
     CONFIG__PERSISTENT_INLINE_COMMENTS: "true",
     CONFIG__REASONING_EFFORT: "none",
-    GITHUB_APP__BOT_USER: "agoodkind-nano-pr-reviewer[bot]",
+    GITHUB_APP__BOT_USER: "agoodkind-pr-review-agent[bot]",
     GITHUB_APP__HANDLE_PR_ACTIONS: '["opened", "reopened", "ready_for_review"]',
     GITHUB_APP__HANDLE_PUSH_TRIGGER: "true",
     GITHUB_APP__PR_COMMANDS: '["/review"]',

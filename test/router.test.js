@@ -183,6 +183,10 @@ test("PR-Agent triggers automatic reviews and keeps improve manual", function ()
   assert.equal(environment.GITHUB__PUBLISH_REVIEW_LIFECYCLE, "true");
   assert.equal(environment.GITHUB__REVIEW_DECISION_MIN_IMPORTANCE, "7");
   assert.equal(environment.GITHUB__REVIEW_LIFECYCLE_TIMEOUT_SECONDS, "600");
+  assert.equal(
+    environment.GITHUB_APP__BOT_USER,
+    "agoodkind-pr-review-agent[bot]",
+  );
   assert.deepEqual(JSON.parse(environment.GITHUB_APP__PR_COMMANDS), ["/review"]);
   assert.deepEqual(JSON.parse(environment.GITHUB_APP__PUSH_COMMANDS), ["/review"]);
 });
