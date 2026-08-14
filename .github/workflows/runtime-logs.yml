@@ -1,4 +1,4 @@
-name: Runtime errors
+name: Runtime logs
 
 on:
   workflow_dispatch:
@@ -16,11 +16,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Capture runtime errors
+      - name: Capture runtime logs
         timeout-minutes: 2
         uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd
         continue-on-error: true
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: tail agoodkind-nano-pr-reviewer --format json --status error
+          command: tail agoodkind-nano-pr-reviewer --format pretty
