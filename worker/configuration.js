@@ -1,31 +1,21 @@
 export function createPrAgentEnvironment(secrets) {
+  const {
+    CF_ACCESS_CLIENT_ID,
+    CF_ACCESS_CLIENT_SECRET,
+    GITHUB_PRIVATE_KEY,
+    GITHUB_WEBHOOK_SECRET,
+    OPENAI_KEY,
+  } = secrets;
+
   return {
-    CONFIG__FALLBACK_MODELS: "[]",
-    CONFIG__MAX_MODEL_TOKENS: "32000",
-    CONFIG__MODEL: "gpt-5.6-sol",
-    CONFIG__PERSISTENT_INLINE_COMMENTS: "true",
-    CONFIG__REASONING_EFFORT: "none",
-    GITHUB_APP__BOT_USER: "agoodkind-pr-review-agent[bot]",
-    GITHUB_APP__HANDLE_PR_ACTIONS: '["opened", "reopened", "ready_for_review"]',
-    GITHUB_APP__HANDLE_PUSH_TRIGGER: "true",
-    GITHUB_APP__PR_COMMANDS: '["/review"]',
-    GITHUB_APP__PUSH_COMMANDS: '["/review"]',
-    GITHUB__APP_ID: "4571682",
-    GITHUB__DEPLOYMENT_TYPE: "app",
-    GITHUB__PRIVATE_KEY: secrets.GITHUB_PRIVATE_KEY,
-    GITHUB__PUBLISH_AS_CHECK_RUN: "false",
-    GITHUB__PUBLISH_REVIEW_DECISION: "true",
-    GITHUB__PUBLISH_REVIEW_LIFECYCLE: "true",
-    GITHUB__REVIEW_DECISION_MIN_IMPORTANCE: "7",
-    GITHUB__REVIEW_LIFECYCLE_TIMEOUT_SECONDS: "600",
-    GITHUB__WEBHOOK_SECRET: secrets.GITHUB_WEBHOOK_SECRET,
-    GUNICORN_WORKERS: "1",
-    LITELLM__EXTRA_HEADERS: JSON.stringify({
-      "CF-Access-Client-ID": secrets.CF_ACCESS_CLIENT_ID,
-      "CF-Access-Client-Secret": secrets.CF_ACCESS_CLIENT_SECRET,
-    }),
-    OPENAI__API_BASE: "https://clyde-suburban.goodkind.io/v1",
-    OPENAI__KEY: secrets.OPENAI_KEY,
-    PR_CODE_SUGGESTIONS__COMMITABLE_CODE_SUGGESTIONS: "true",
+    CF_ACCESS_CLIENT_ID,
+    CF_ACCESS_CLIENT_SECRET,
+    CLYDE_API_KEY: OPENAI_KEY,
+    CLYDE_BASE_URL: "https://clyde-suburban.goodkind.io/v1",
+    GITHUB_APP_ID: "4571682",
+    GITHUB_BOT_LOGIN: "agoodkind-pr-review-agent[bot]",
+    GITHUB_PRIVATE_KEY,
+    GITHUB_WEBHOOK_SECRET,
+    PORT: "3000",
   };
 }
