@@ -1,3 +1,3 @@
-FROM ghcr.io/agoodkind/pr-review-agent@sha256:efecb797d71440b89b61932661710475f24cc3c5ad16c53d9189530e5f4f445a
+FROM ghcr.io/agoodkind/pr-review-agent@sha256:22f39f8fc005ef57f688558c7e801af63607ae967a638aa3de8ae10fdb181cf2
 
 USER 65532:65532
