@@ -3,6 +3,9 @@
   "name": "agoodkind-nano-pr-reviewer",
   "main": "worker/index.js",
   "compatibility_date": "2026-08-12",
+  "observability": {
+    "enabled": true
+  },
   "workers_dev": true,
   "containers": [
     {
