@@ -196,6 +196,7 @@ test("Go review service receives production configuration", function () {
     ["GITHUB_PRIVATE_KEY", fixtureC],
     ["GITHUB_WEBHOOK_SECRET", fixtureD],
     ["PORT", "3000"],
+    ["REVIEW_MIN_IMPORTANCE", "9"],
   ]);
 
   assert.deepEqual(environment, expectedEnvironment);

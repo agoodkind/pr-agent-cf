@@ -17,5 +17,6 @@ export function createPrAgentEnvironment(secrets) {
     GITHUB_PRIVATE_KEY,
     GITHUB_WEBHOOK_SECRET,
     PORT: "3000",
+    REVIEW_MIN_IMPORTANCE: "9",
   };
 }
