@@ -1,7 +1,3 @@
-FROM ghcr.io/agoodkind/pr-agent@sha256:01434b95aa966db79a94ffc04355719f25fe2089857ea076f5349dc6b7ef7ccf
+FROM ghcr.io/agoodkind/pr-review-agent@sha256:b8cf108c0dbcec251afa956c1e540aa75fcb85fa7e1861e75b0f0ee20fe119cd
 
-ENV HOME=/tmp
-
-USER 65534:65534
-
-EXPOSE 3000
+USER 65532:65532

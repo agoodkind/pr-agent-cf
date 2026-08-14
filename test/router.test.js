@@ -33,7 +33,7 @@ function createEnvironment(forwardedRequests) {
   };
 }
 
-test("health does not start PR-Agent", async function () {
+test("health does not start the review container", async function () {
   assert.equal(typeof routeRequest, "function");
 
   const forwardedRequests = [];
@@ -47,7 +47,7 @@ test("health does not start PR-Agent", async function () {
   assert.equal(forwardedRequests.length, 0);
 });
 
-test("webhooks reach the canonical PR-Agent container", async function () {
+test("webhooks reach the Go review container", async function () {
   assert.equal(typeof routeRequest, "function");
 
   const forwardedRequests = [];
@@ -170,44 +170,33 @@ test("health probe defaults to the container-backed root path", async function (
   assert.equal(requestedPath, "/");
 });
 
-test("PR-Agent triggers automatic reviews and keeps improve manual", function () {
+test("Go review service receives production configuration", function () {
   assert.equal(typeof createPrAgentEnvironment, "function");
 
-  const environment = createPrAgentEnvironment({});
+  const fixtureA = "fixture-a";
+  const fixtureB = "fixture-b";
+  const fixtureC = "fixture-c";
+  const fixtureD = "fixture-d";
+  const fixtureE = "fixture-e";
+  const secrets = Object.fromEntries([
+    ["CF_ACCESS_CLIENT_ID", fixtureA],
+    ["CF_ACCESS_CLIENT_SECRET", fixtureB],
+    ["GITHUB_PRIVATE_KEY", fixtureC],
+    ["GITHUB_WEBHOOK_SECRET", fixtureD],
+    ["OPENAI_KEY", fixtureE],
+  ]);
+  const environment = createPrAgentEnvironment(secrets);
+  const expectedEnvironment = Object.fromEntries([
+    ["CF_ACCESS_CLIENT_ID", fixtureA],
+    ["CF_ACCESS_CLIENT_SECRET", fixtureB],
+    ["CLYDE_API_KEY", fixtureE],
+    ["CLYDE_BASE_URL", "https://clyde-suburban.goodkind.io/v1"],
+    ["GITHUB_APP_ID", "4571682"],
+    ["GITHUB_BOT_LOGIN", "agoodkind-pr-review-agent[bot]"],
+    ["GITHUB_PRIVATE_KEY", fixtureC],
+    ["GITHUB_WEBHOOK_SECRET", fixtureD],
+    ["PORT", "3000"],
+  ]);
 
-  assert.equal(environment.CONFIG__PERSISTENT_INLINE_COMMENTS, "true");
-  assert.equal(environment.PR_CODE_SUGGESTIONS__COMMITABLE_CODE_SUGGESTIONS, "true");
-  assert.equal(environment.GITHUB_APP__HANDLE_PUSH_TRIGGER, "true");
-  assert.equal(environment.GITHUB__PUBLISH_AS_CHECK_RUN, "false");
-  assert.equal(environment.GITHUB__PUBLISH_REVIEW_DECISION, "true");
-  assert.equal(environment.GITHUB__PUBLISH_REVIEW_LIFECYCLE, "true");
-  assert.equal(environment.GITHUB__REVIEW_DECISION_MIN_IMPORTANCE, "7");
-  assert.equal(environment.GITHUB__REVIEW_LIFECYCLE_TIMEOUT_SECONDS, "600");
-  assert.equal(
-    environment.GITHUB_APP__BOT_USER,
-    "agoodkind-pr-review-agent[bot]",
-  );
-  assert.deepEqual(JSON.parse(environment.GITHUB_APP__PR_COMMANDS), ["/review"]);
-  assert.deepEqual(JSON.parse(environment.GITHUB_APP__PUSH_COMMANDS), ["/review"]);
-});
-
-test("PR-Agent routes GPT 5.6 Sol requests through Clyde", function () {
-  assert.equal(typeof createPrAgentEnvironment, "function");
-
-  const environment = createPrAgentEnvironment({
-    CF_ACCESS_CLIENT_ID: "access-client-id",
-    CF_ACCESS_CLIENT_SECRET: "redacted",
-    OPENAI_KEY: "clyde-token",
-  });
-
-  assert.equal(environment.CONFIG__MODEL, "gpt-5.6-sol");
-  assert.equal(
-    environment.OPENAI__API_BASE,
-    "https://clyde-suburban.goodkind.io/v1",
-  );
-  assert.equal(environment.OPENAI__KEY, "clyde-token");
-  assert.deepEqual(JSON.parse(environment.LITELLM__EXTRA_HEADERS), {
-    "CF-Access-Client-ID": "access-client-id",
-    "CF-Access-Client-Secret": "redacted",
-  });
+  assert.deepEqual(environment, expectedEnvironment);
 });
