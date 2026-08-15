@@ -6,7 +6,7 @@ import { routeRequest } from "./router.js";
 
 export class PrAgentContainer extends Container {
   defaultPort = 3000;
-  sleepAfter = "1m";
+  sleepAfter = "11m";
   envVars = createPrAgentEnvironment(env);
 }
 
