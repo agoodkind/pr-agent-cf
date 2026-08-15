@@ -13,7 +13,7 @@ export function createPrAgentEnvironment(secrets) {
     CLYDE_API_KEY: OPENAI_KEY,
     CLYDE_BASE_URL: "https://clyde-suburban.goodkind.io/v1",
     GITHUB_APP_ID: "4571682",
-    GITHUB_BOT_LOGIN: "agoodkind-pr-review-agent[bot]",
+    GITHUB_BOT_LOGIN: "goodkind-io-pr-agent[bot]",
     GITHUB_PRIVATE_KEY,
     GITHUB_WEBHOOK_SECRET,
     PORT: "3000",

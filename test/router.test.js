@@ -192,7 +192,7 @@ test("Go review service receives production configuration", function () {
     ["CLYDE_API_KEY", fixtureE],
     ["CLYDE_BASE_URL", "https://clyde-suburban.goodkind.io/v1"],
     ["GITHUB_APP_ID", "4571682"],
-    ["GITHUB_BOT_LOGIN", "agoodkind-pr-review-agent[bot]"],
+    ["GITHUB_BOT_LOGIN", "goodkind-io-pr-agent[bot]"],
     ["GITHUB_PRIVATE_KEY", fixtureC],
     ["GITHUB_WEBHOOK_SECRET", fixtureD],
     ["PORT", "3000"],
