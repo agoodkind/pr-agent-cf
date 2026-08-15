@@ -2,6 +2,11 @@ name: Runtime logs
 
 on:
   workflow_dispatch:
+    inputs:
+      needle:
+        description: Exact delivery id, head SHA, or trace id
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -10,17 +15,9 @@ jobs:
   capture:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - name: Capture runtime logs
-        timeout-minutes: 2
-        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd
-        continue-on-error: true
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: tail agoodkind-nano-pr-reviewer --format pretty
+      - uses: actions/checkout@v7.0.1
+      - name: Query retained runtime logs
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: scripts/query-observability.sh "${{ inputs.needle }}"
