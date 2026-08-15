@@ -19,5 +19,6 @@ export function createPrAgentEnvironment(secrets) {
     PORT: "3000",
     REVIEW_MAX_UNRESOLVED_COMMENTS: "3",
     REVIEW_MIN_IMPORTANCE: "9",
+    REVIEW_TIMEOUT: "10m",
   };
 }
