@@ -199,6 +199,7 @@ test("Go review service receives production configuration", function () {
     ["REVIEW_MAX_UNRESOLVED_COMMENTS", "3"],
     ["REVIEW_MIN_IMPORTANCE", "9"],
     ["REVIEW_TIMEOUT", "10m"],
+    ["REVIEW_WORKERS", "4"],
   ]);
 
   assert.deepEqual(environment, expectedEnvironment);
