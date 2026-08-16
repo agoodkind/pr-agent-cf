@@ -20,5 +20,6 @@ export function createPrAgentEnvironment(secrets) {
     REVIEW_MAX_UNRESOLVED_COMMENTS: "3",
     REVIEW_MIN_IMPORTANCE: "9",
     REVIEW_TIMEOUT: "10m",
+    REVIEW_WORKERS: "4",
   };
 }
